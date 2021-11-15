@@ -106,11 +106,11 @@ def test_build_gradebook():
         },
     ]
     gradebook_after = {
-        "date": 19970727,
+        "assignment_date": 19970727,
         "assignment_name": "vergil-2.101-110",
         "assignment_type": "quiz",
         "assignment_category": "minor",
-        "students": students,
+        "assignment_grades": students,
     }
     # }}}
     test_gradebook = gbn.build_gradebook(

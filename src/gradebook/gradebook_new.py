@@ -94,11 +94,11 @@ def make_file_name(assignment_type, assignment_name, ymd):
 def build_gradebook(a_date, a_name, a_type, a_category, students):
     """Return full gradebook dict to be stored as JSON."""
     gradebook = {
-        "date": a_date,
+        "assignment_date": a_date,
         "assignment_name": a_name,
         "assignment_type": a_type,
         "assignment_category": a_category,
-        "students": students,
+        "assignment_grades": students,
     }
     return gradebook
 

@@ -63,7 +63,7 @@ def load_grades(student_objs, data_filter=None):
     """Load all grades."""
     for grade_data in grade_data_generator(data_filter):
         assignment_category = grade_data["assignment_category"]
-        students = grade_data["students"]
+        students = grade_data["assignment_grades"]
         for student in students.keys():
             grade = students[student]["grade"]
             if grade:
