@@ -54,33 +54,37 @@ def test_validate_file_name_unique_exception(tmpdir):
         gbn.validate_file_name_unique(file_path)
 
 
-def test_update_students():
-    # {{{ Lists of dicts of students with and without grade keys
-    students_before = {
+def test_make_assignment_grades():
+    students = {
+        "mfrede02@school.edu": {
+            "first_name": "Michael",
+            "last_name": "Frede"
+        },
         "gstriker@school.edu": {
             "first_name": "Gisela",
             "last_name": "Striker"
         },
-        "mfrede@school.edu": {
+        "mfrede01@school.edu": {
             "first_name": "Michael",
             "last_name": "Frede"
         },
     }
-    students_after = {
-        "gstriker@school.edu": {
-            "first_name": "Gisela",
-            "last_name": "Striker",
-            "grade": None,
-        },
-        "mfrede@school.edu": {
-            "first_name": "Michael",
-            "last_name": "Frede",
-            "grade": None,
-        },
-    }
-    # }}}
-    gbn.update_students(students_before)
-    assert students_before == students_after
+    expected_assignment_grades = [
+            {
+                "email": "mfrede01@school.edu",
+                "grade": None,
+            },
+            {
+                "email": "mfrede02@school.edu",
+                "grade": None,
+            },
+            {
+                "email": "gstriker@school.edu",
+                "grade": None,
+            },
+    ]
+    actual_assignment_grades = gbn.make_assignment_grades(students)
+    assert expected_assignment_grades == actual_assignment_grades
 
 
 def test_make_file_name():
@@ -93,15 +97,11 @@ def test_build_gradebook():
     # {{{ List of dicts of students
     students = [
         {
-            "first_name": "Gisela",
-            "last_name": "Striker",
-            "email": "gstriker@school.edu",
+            "email": "mfrede@school.edu",
             "grade": None,
         },
         {
-            "first_name": "Michael",
-            "last_name": "Frede",
-            "email": "mfrede@school.edu",
+            "email": "gstriker@school.edu",
             "grade": None,
         },
     ]

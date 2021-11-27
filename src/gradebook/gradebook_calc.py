@@ -60,14 +60,14 @@ def grade_data_generator(date_filter=None):
 
 
 def load_grades(student_objs, data_filter=None):
-    """Load all grades."""
+    """Load all grades from gradebook files."""
     for grade_data in grade_data_generator(data_filter):
         assignment_category = grade_data["assignment_category"]
-        students = grade_data["assignment_grades"]
-        for student in students.keys():
-            grade = students[student]["grade"]
+        for student in grade_data["assignment_grades"]:
+            grade = student["grade"]
+            email = student["email"]
             if grade:
-                student_objs[student].add_grade(grade, assignment_category)
+                student_objs[email].add_grade(grade, assignment_category)
 
 
 def display_grades(students, categories_pretty, weights):

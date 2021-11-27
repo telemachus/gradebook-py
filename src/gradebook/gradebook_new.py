@@ -70,18 +70,22 @@ def validate_file_name_unique(file_path):
     return file_path
 
 
-def update_students(students):
-    """Update and return a dict of dicts.
+def make_assignment_grades(students):
+    """Create a list of assignment grade entries from a dict of students.
 
     students: a dict of dicts with student information
 
-    In order to use the dict of dicts in a gradebook file, add a new
-    key/value pair to each student dict: "grade": None.
-
-    No return value since the list is modified by reference.
+    Returns a list of dicts. Each item in the list is a dict containing
+    a student email and an initial grade of None.
     """
-    for student in students.values():
-        student["grade"] = None
+    assignment_grades = []
+    for student_email in students.keys():
+        assignment_grades.append({"email": student_email, "grade": None})
+    sorted_assignment_grades = sorted(assignment_grades, key = lambda x:
+            (students[x["email"]]["last_name"],
+                students[x["email"]]["first_name"],
+                x["email"]))
+    return sorted_assignment_grades
 
 
 def make_file_name(assignment_type, assignment_name, ymd):
@@ -155,13 +159,13 @@ def main(calc_args):
     except ValueError:
         gb_die(f"{file_name} already exists: use another name")
 
-    update_students(cfg["students"])
+    assignment_grades = make_assignment_grades(cfg["students"])
     gradebook = build_gradebook(
         assignment_date,
         assignment_name,
         assignment_type,
         cfg["types_to_categories"][assignment_type],
-        cfg["students"],
+        assignment_grades,
     )
 
     try:
