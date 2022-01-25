@@ -31,7 +31,7 @@ _gradebook_long_opts()
 	pre_prev="${COMP_WORDS[COMP_CWORD-2]}"
 	generic_opts="--help --version"
 	calculate_opts="--help --semester --quarter"
-	new_opts="--helt --type --name --date"
+	new_opts="--help --type --name --date"
 	names_opts="--help -last-first"
 
 	if [[ ( "${prev}" == calc ) || ( "${prev}" == calculate ) ]]; then
