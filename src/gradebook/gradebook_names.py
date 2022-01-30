@@ -27,11 +27,9 @@ def compose_student_names(students, last_first=False):
     Return value is a list of names in the desired format.
     """
     if last_first:
-        return [f"{s['last_name']}, {s['first_name']}" for s in
-                students.values()]
+        return [f"{s['last_name']}, {s['first_name']}" for s in students.values()]
 
-    return [f"{s['first_name']} {s['last_name']}" for s in
-            students.values()]
+    return [f"{s['first_name']} {s['last_name']}" for s in students.values()]
 
 
 def main(calc_args):

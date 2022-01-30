@@ -1,5 +1,6 @@
 """usage:
-    gradebook calc|calculate    [--semester N|--quarter N]
+    gradebook calculate [--semester N|--quarter N]
+    gradebook calc [--semester N|--quarter N]
 
 options:
     --semester N, -s N          Calculate grades for semester N

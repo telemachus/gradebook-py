@@ -81,10 +81,14 @@ def make_assignment_grades(students):
     assignment_grades = []
     for student_email in students.keys():
         assignment_grades.append({"email": student_email, "grade": None})
-    sorted_assignment_grades = sorted(assignment_grades, key = lambda x:
-            (students[x["email"]]["last_name"],
-                students[x["email"]]["first_name"],
-                x["email"]))
+    sorted_assignment_grades = sorted(
+        assignment_grades,
+        key=lambda x: (
+            students[x["email"]]["last_name"],
+            students[x["email"]]["first_name"],
+            x["email"],
+        ),
+    )
     return sorted_assignment_grades
 
 
@@ -151,9 +155,7 @@ def main(calc_args):
         except ValueError:
             gb_die(f"{assignment_date} is not a valid date")
 
-    file_name = make_file_name(
-        assignment_type, assignment_name, assignment_date
-    )
+    file_name = make_file_name(assignment_type, assignment_name, assignment_date)
     try:
         validate_file_name_unique(file_name)
     except ValueError:

@@ -12,16 +12,13 @@ class Student:
         for category in categories:
             self._categories[category] = []
 
-
     def add_grade(self, grade, category):
         self._categories[category].append(grade)
-
 
     def average(self, category):
         if not self._categories[category]:
             return "No results"
         return round(fmean(self._categories[category]))
-
 
     def total_average(self, weights):
         summed_average = 0
@@ -37,4 +34,3 @@ class Student:
         if not summed_weight:
             return "No results"
         return round(summed_average / summed_weight)
-

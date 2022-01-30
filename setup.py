@@ -4,9 +4,9 @@ setup(
     name="gradebook",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    entry_points = {
+    entry_points={
         "console_scripts": [
             "gradebook = gradebook.gradebook_bootstrap:main",
         ],
-    }
+    },
 )
