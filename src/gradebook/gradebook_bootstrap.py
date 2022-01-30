@@ -5,7 +5,7 @@ options:
     --version, -v       Show version
 
 The following commands are available:
-    calc|calculate      Calculate grades for quarter, semester, or year
+    calc(ulate)         Calculate grades for quarter, semester, or year
     names               Show names for the current class
     new                 Generate a gradebook file for a specified assignment
 
