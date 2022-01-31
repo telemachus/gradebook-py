@@ -2,13 +2,14 @@ import pytest
 from gradebook import gradebook_student as gbs
 
 
-@pytest.mark.parametrize("fname, lname, email",
-                         [
-                             ("Michael", "Frede", "mfrede@school.edu"),
-                             ("Gisela", "Striker", "gstriker@school.edu"),
-                             ("Julia", "Annas", "jannas@school.edu"),
-                         ]
-                        )
+@pytest.mark.parametrize(
+    "fname, lname, email",
+    [
+        ("Michael", "Frede", "mfrede@school.edu"),
+        ("Gisela", "Striker", "gstriker@school.edu"),
+        ("Julia", "Annas", "jannas@school.edu"),
+    ],
+)
 def test_student_initialization(fname, lname, email):
     category = "major"
     categories = {category: True}

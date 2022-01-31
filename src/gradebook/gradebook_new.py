@@ -172,5 +172,5 @@ def main(calc_args):
 
     try:
         write_json(gradebook, file_name)
-    except (IOError, OSError):
+    except OSError:
         gb_die(f"failed to write json to {file_name}")

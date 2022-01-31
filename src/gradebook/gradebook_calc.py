@@ -10,7 +10,6 @@ options:
 """
 import json
 from pathlib import Path
-from sys import exit
 from docopt import docopt
 from gradebook.gradebook_common import load_config as gb_load_config
 from gradebook.gradebook_common import die as gb_die

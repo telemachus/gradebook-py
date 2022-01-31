@@ -56,32 +56,23 @@ def test_validate_file_name_unique_exception(tmpdir):
 
 def test_make_assignment_grades():
     students = {
-        "mfrede02@school.edu": {
-            "first_name": "Michael",
-            "last_name": "Frede"
-        },
-        "gstriker@school.edu": {
-            "first_name": "Gisela",
-            "last_name": "Striker"
-        },
-        "mfrede01@school.edu": {
-            "first_name": "Michael",
-            "last_name": "Frede"
-        },
+        "mfrede02@school.edu": {"first_name": "Michael", "last_name": "Frede"},
+        "gstriker@school.edu": {"first_name": "Gisela", "last_name": "Striker"},
+        "mfrede01@school.edu": {"first_name": "Michael", "last_name": "Frede"},
     }
     expected_assignment_grades = [
-            {
-                "email": "mfrede01@school.edu",
-                "grade": None,
-            },
-            {
-                "email": "mfrede02@school.edu",
-                "grade": None,
-            },
-            {
-                "email": "gstriker@school.edu",
-                "grade": None,
-            },
+        {
+            "email": "mfrede01@school.edu",
+            "grade": None,
+        },
+        {
+            "email": "mfrede02@school.edu",
+            "grade": None,
+        },
+        {
+            "email": "gstriker@school.edu",
+            "grade": None,
+        },
     ]
     actual_assignment_grades = gbn.make_assignment_grades(students)
     assert expected_assignment_grades == actual_assignment_grades

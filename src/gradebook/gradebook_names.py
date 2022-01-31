@@ -5,10 +5,8 @@ options:
     --help, -h              Show this help screen
 
 """
-from datetime import datetime
 from pathlib import Path
 import json
-import re
 from docopt import docopt
 from gradebook.gradebook_common import load_config as gb_load_config
 from gradebook.gradebook_common import die as gb_die
