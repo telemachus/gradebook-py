@@ -9,4 +9,5 @@ setup(
             "gradebook = gradebook.gradebook_bootstrap:main",
         ],
     },
+    install_requires = [ 'docopt', ]
 )
