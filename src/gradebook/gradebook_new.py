@@ -16,6 +16,7 @@ from gradebook.gradebook_common import load_config as gb_load_config
 from gradebook.gradebook_common import die as gb_die
 
 CONFIG_FILE = Path.cwd() / "class.json"
+TODAY_YMD = datetime.today().strftime("%Y%m%d")
 
 
 def validate_assignment_type(assignment_type, assignment_types):
@@ -47,7 +48,7 @@ def validate_assignment_name(assignment_name):
     return assignment_name
 
 
-def validate_assignment_date(date_string):
+def validate_assignment_date(date_string=TODAY_YMD):
     """Return date_string if it is a valid %Y%m%d date.
 
     date_string: string representation of a date to check
@@ -147,13 +148,10 @@ def main(calc_args):
         msg += "use only a-z, A-Z, 0-9, - and _ in the name."
         gb_die(msg)
 
-    if assignment_date is None:
-        assignment_date = datetime.today().strftime("%Y%m%d")
-    else:
-        try:
-            validate_assignment_date(assignment_date)
-        except ValueError:
-            gb_die(f"{assignment_date} is not a valid date")
+    try:
+        validate_assignment_date(assignment_date)
+    except ValueError:
+        gb_die(f"{assignment_date} is not a valid date")
 
     file_name = make_file_name(assignment_type, assignment_name, assignment_date)
     try:
