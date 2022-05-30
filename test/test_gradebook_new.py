@@ -49,18 +49,6 @@ def test_validate_assignment_date_exception():
         gbn.validate_assignment_date(ymd)
 
 
-def test_validate_file_name_unique():
-    file_name = Path("quiz-vergil-2.101-123-19970727.gradebook")
-    assert file_name == gbn.validate_file_name_unique(file_name)
-
-
-def test_validate_file_name_unique_exception(tmpdir):
-    file_path = tmpdir.join("quiz-vergil-2.101-123-19970727.gradebook")
-    file_path.write("Can you hear me now?")
-    with pytest.raises(ValueError):
-        gbn.validate_file_name_unique(file_path)
-
-
 def test_make_assignment_grades():
     students = {
         "mfrede02@school.edu": {"first_name": "Michael", "last_name": "Frede"},

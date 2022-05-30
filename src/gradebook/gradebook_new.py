@@ -104,30 +104,6 @@ def validate_assignment_date_or_die(date_string):
         gb_die(f"{date_string} is not a valid date")
 
 
-def validate_file_name_unique(file_name):
-    """Validates a given file name.
-
-    Args:
-        file_name:
-            A pathlib object to test for uniqueness.
-
-    Raises:
-        ValueError: When file_name already exists.
-    """
-    if file_name.exists():
-        raise ValueError()
-    return file_name
-
-
-def validate_file_name_unique_or_die(file_name):
-    """Dies if file_name already exists in this directory."""
-    # TODO: This is a race condition. Refactor or remove!
-    try:
-        validate_file_name_unique(file_name)
-    except ValueError:
-        gb_die(f"{file_name} already exists: use another name")
-
-
 def make_assignment_grades(students):
     """Creates a list of assignment grade entries from a dict of students.
 
@@ -160,8 +136,8 @@ def make_assignment_grades(students):
 def make_file_name(assignment_type, assignment_name, ymd):
     """Creates a name for the new gradebook file."""
     file_name = f"{assignment_type}-{assignment_name}-{ymd}.gradebook"
-    file_path = Path.cwd() / file_name
-    return file_path
+    file_name = Path.cwd() / file_name
+    return file_name
 
 
 def build_gradebook(a_date, a_name, a_type, a_category, students):
@@ -178,7 +154,7 @@ def build_gradebook(a_date, a_name, a_type, a_category, students):
 
 def write_json(obj, file_path):
     """Writes a Python object to a file as json."""
-    with file_path.open(mode="wt", encoding="utf-8") as grades_file:
+    with file_path.open(mode="xt", encoding="utf-8") as grades_file:
         json.dump(obj, grades_file, indent=4)
 
 
@@ -196,7 +172,6 @@ def main(calc_args):
     validate_assignment_name_or_die(assignment_name)
     validate_assignment_date_or_die(arguments["--date"])
     file_name = make_file_name(assignment_type, assignment_name, assignment_date)
-    validate_file_name_unique_or_die(file_name)
 
     assignment_grades = make_assignment_grades(cfg["students"])
     gradebook = build_gradebook(
