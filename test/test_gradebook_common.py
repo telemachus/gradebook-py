@@ -6,7 +6,7 @@ def test_warn_no_program_name(capsys):
     msg = "bad input!"
     msg_err = msg + "\n"
     gbc.warn(msg, program_name=False)
-    assert capsys.readouterr().err == msg_err
+    assert msg_err == capsys.readouterr().err
 
 
 def test_warn_with_program_name(capsys, monkeypatch):
@@ -14,17 +14,17 @@ def test_warn_with_program_name(capsys, monkeypatch):
     msg = "bad input!"
     msg_err = "gradebook: " + msg + "\n"
     gbc.warn(msg)
-    assert capsys.readouterr().err == msg_err
+    assert msg_err == capsys.readouterr().err
 
 
-def test_die_no_program_name(capsys, mocker):
+def test_die_no_program_name(mocker):
     mocker.patch("sys.exit")
     msg = "bad input!"
     gbc.die(msg, program_name=False)
     sys.exit.assert_called_once_with(msg)
 
 
-def test_die_with_program_name(capsys, mocker):
+def test_die_with_program_name(mocker):
     mocker.patch("sys.argv", ["gradebook"])
     mocker.patch("sys.exit")
     msg = "bad input!"
@@ -72,5 +72,4 @@ dummy_dict = {
 
 def test_load_config(shared_datadir):
     config_file = "class.json"
-    content = gbc.load_config(shared_datadir / config_file)
-    assert content == dummy_dict
+    assert dummy_dict == gbc.load_config(shared_datadir / config_file)

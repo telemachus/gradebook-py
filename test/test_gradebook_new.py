@@ -1,13 +1,23 @@
-"""Test src/gradebook/gradebook_new."""
 from pathlib import Path
 import pytest
+from datetime import datetime
 from gradebook import gradebook_new as gbn
+
+
+@pytest.mark.parametrize("date", ["20000101", "19680809"])
+def test_normalize_date_with_date_given(date):
+    assert date == gbn.normalize_date(date)
+
+
+def test_normalize_date_when_date_none():
+    ymd = datetime.today().strftime("%Y%m%d")
+    assert ymd == gbn.normalize_date(None)
 
 
 @pytest.mark.parametrize("ast_type", ["quiz", "test", "cp"])
 def test_validate_assignment_type(ast_type):
     ast_types = ["cp", "quiz", "test"]
-    assert gbn.validate_assignment_type(ast_type, ast_types) == ast_type
+    assert ast_type == gbn.validate_assignment_type(ast_type, ast_types)
 
 
 @pytest.mark.parametrize("ast_type", ["quest", "essay", "paper"])
@@ -19,8 +29,7 @@ def test_validate_assignment_type_exception(ast_type):
 
 def test_validate_assignment_name():
     ast_name = "vergil-2.101-123"
-    returned_name = gbn.validate_assignment_name(ast_name)
-    assert returned_name == ast_name
+    assert ast_name == gbn.validate_assignment_name(ast_name)
 
 
 def test_validate_assignment_name_exception():
@@ -31,8 +40,7 @@ def test_validate_assignment_name_exception():
 
 def test_validate_assignment_date():
     ymd = "19970727"
-    returned_ymd = gbn.validate_assignment_date(ymd)
-    assert returned_ymd == ymd
+    assert ymd == gbn.validate_assignment_date(ymd)
 
 
 def test_validate_assignment_date_exception():
@@ -42,9 +50,8 @@ def test_validate_assignment_date_exception():
 
 
 def test_validate_file_name_unique():
-    file_path = Path("quiz-vergil-2.101-123-19970727.gradebook")
-    returned_file_path = gbn.validate_file_name_unique(file_path)
-    assert returned_file_path == file_path
+    file_name = Path("quiz-vergil-2.101-123-19970727.gradebook")
+    assert file_name == gbn.validate_file_name_unique(file_name)
 
 
 def test_validate_file_name_unique_exception(tmpdir):
@@ -74,14 +81,14 @@ def test_make_assignment_grades():
             "grade": None,
         },
     ]
-    actual_assignment_grades = gbn.make_assignment_grades(students)
-    assert expected_assignment_grades == actual_assignment_grades
+    assert expected_assignment_grades == gbn.make_assignment_grades(students)
 
 
 def test_make_file_name():
-    quiz_file_path = Path.cwd() / "quiz-vergil-2.101-123-19970727.gradebook"
-    other_file_path = gbn.make_file_name("quiz", "vergil-2.101-123", 19970727)
-    assert quiz_file_path == other_file_path
+    expected_file_name = Path.cwd() / "quiz-vergil-2.101-123-19970727.gradebook"
+    assert expected_file_name == gbn.make_file_name(
+        "quiz", "vergil-2.101-123", "19970727"
+    )
 
 
 def test_build_gradebook():
@@ -97,17 +104,16 @@ def test_build_gradebook():
         },
     ]
     gradebook_after = {
-        "assignment_date": 19970727,
+        "assignment_date": "19970727",
         "assignment_name": "vergil-2.101-110",
         "assignment_type": "quiz",
         "assignment_category": "minor",
         "assignment_grades": students,
     }
     # }}}
-    test_gradebook = gbn.build_gradebook(
-        19970727, "vergil-2.101-110", "quiz", "minor", students
+    assert gradebook_after == gbn.build_gradebook(
+        "19970727", "vergil-2.101-110", "quiz", "minor", students
     )
-    assert test_gradebook == gradebook_after
 
 
 def test_write_json(tmp_path):

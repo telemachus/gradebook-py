@@ -14,10 +14,10 @@ def test_student_initialization(fname, lname, email):
     category = "major"
     categories = {category: True}
     random_student = gbs.Student(fname, lname, email, categories)
-    assert random_student.first_name == fname
-    assert random_student.last_name == lname
-    assert random_student.email == email
-    assert random_student._categories[category] == []
+    assert fname == random_student.first_name
+    assert lname == random_student.last_name
+    assert email == random_student.email
+    assert [] == random_student._categories[category]
 
 
 def test_add_grade():
@@ -29,7 +29,7 @@ def test_add_grade():
     grade = 89.9
     michael_frede = gbs.Student(fname, lname, email, categories)
     michael_frede.add_grade(grade, category)
-    assert michael_frede._categories[category][0] == grade
+    assert grade == michael_frede._categories[category][0]
 
 
 def test_average():
@@ -39,12 +39,12 @@ def test_average():
     category = "major"
     categories = {category: True}
     michael_frede = gbs.Student(fname, lname, email, categories)
-    assert michael_frede.average(category) == "No results"
+    assert "No results" == michael_frede.average(category)
 
     grades = [85, 90, 95]
     for grade in grades:
         michael_frede.add_grade(grade, category)
-    assert michael_frede.average(category) == 90
+    assert 90 == michael_frede.average(category)
 
 
 def test_total_average():
@@ -54,14 +54,14 @@ def test_total_average():
     categories = {"major": True, "minor": True, "cp": True}
     weights = {"major": 50, "minor": 30, "cp": 20}
     michael_frede = gbs.Student(fname, lname, email, categories)
-    assert michael_frede.total_average(weights) == "No results"
+    assert "No results" == michael_frede.total_average(weights)
 
     grades = [90, 90, 90]
     for grade, category in zip(grades, categories.keys()):
         michael_frede.add_grade(grade, category)
-    assert michael_frede.total_average(weights) == 90
+    assert 90 == michael_frede.total_average(weights)
 
     grades = [(94, "major"), (82, "minor"), (75, "cp")]
     for grade, category in grades:
         michael_frede.add_grade(grade, category)
-    assert michael_frede.total_average(weights) == 88
+    assert 88 == michael_frede.total_average(weights)

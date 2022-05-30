@@ -1,4 +1,5 @@
 docopt
+pylint
 pytest
 pytest-mock
 pytest-datadir

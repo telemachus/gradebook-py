@@ -11,28 +11,27 @@ options:
 import json
 from pathlib import Path
 from docopt import docopt
-from gradebook.gradebook_common import load_config as gb_load_config
-from gradebook.gradebook_common import die as gb_die
+from gradebook.gradebook_common import load_config_or_die as gb_load_config_or_die
 from gradebook.gradebook_student import Student
 
 CONFIG_FILE = Path.cwd() / "class.json"
 
 
 def get_term_filter(quarter_or_semester, terms):
-    """Return a dict with start and end of term or raise ValueError."""
+    """Returns a dict with start and end of term or raise ValueError."""
     try:
         return terms[quarter_or_semester]
-    except KeyError:
-        raise ValueError()
+    except KeyError as key_error:
+        raise ValueError() from key_error
 
 
 def is_in_term(assignment_date, term):
-    """Test whether an assignment date falls within a specified term."""
+    """Tests whether an assignment date falls within a specified term."""
     return term["start"] <= assignment_date <= term["end"]
 
 
 def load_students(students_dict, categories):
-    """Create and return a dict of Student objects."""
+    """Creates and returns a dict of Student objects."""
     student_objs = {}
     for student in students_dict.keys():
         email = student
@@ -44,12 +43,12 @@ def load_students(students_dict, categories):
 
 
 def extract_date(file_path):
-    """Extract the date from a file path."""
+    """Extracts the date from a file path."""
     return file_path.stem[-8:]
 
 
 def grade_data_generator(date_filter=None):
-    """Yield data from .gradebook files."""
+    """Yields data from grade files."""
     for file_path in Path(".").glob("*.gradebook"):
         if date_filter:
             date = extract_date(file_path)
@@ -60,7 +59,7 @@ def grade_data_generator(date_filter=None):
 
 
 def load_grades(student_objs, data_filter=None):
-    """Load all grades from gradebook files."""
+    """Loads all grades from gradebook files."""
     for grade_data in grade_data_generator(data_filter):
         assignment_category = grade_data["assignment_category"]
         for student in grade_data["assignment_grades"]:
@@ -71,27 +70,22 @@ def load_grades(student_objs, data_filter=None):
 
 
 def display_grades(students, categories_pretty, weights):
-    """Sort the students list and display grades."""
+    """Sorts the students list and displays grades."""
     for student in sorted(students.values(), key=lambda s: s.last_name):
         print(f"{student.first_name} {student.last_name}")
-
         print(f"\tOverall grade: {student.total_average(weights)}")
+
         for category, category_pretty in categories_pretty.items():
             print(f"\t{category_pretty}: {student.average(category)}")
 
 
 def main(calc_args):
-    """Start here."""
+    """Starts here."""
     arguments = docopt(__doc__, argv=calc_args)
     quarter = arguments["--quarter"]
     semester = arguments["--semester"]
 
-    try:
-        cfg = gb_load_config(CONFIG_FILE)
-    except (FileNotFoundError, TypeError):
-        gb_die(f"can't open {CONFIG_FILE.name}")
-    except json.JSONDecodeError:
-        gb_die(f"bad json in {CONFIG_FILE.name}")
+    cfg = gb_load_config_or_die(CONFIG_FILE)
 
     students = load_students(cfg["students"], cfg["categories"])
 

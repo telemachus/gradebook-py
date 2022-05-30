@@ -3,6 +3,8 @@ from statistics import fmean
 
 
 class Student:
+    """Stores grades for individual students."""
+
     def __init__(self, fname, lname, email, categories):
         self.first_name = fname
         self.last_name = lname
@@ -13,14 +15,17 @@ class Student:
             self._categories[category] = []
 
     def add_grade(self, grade, category):
+        """Adds a grade into the list for a given category."""
         self._categories[category].append(grade)
 
     def average(self, category):
+        """Return the rounded mean for a category or "No results"."""
         if not self._categories[category]:
             return "No results"
         return round(fmean(self._categories[category]))
 
     def total_average(self, weights):
+        """Return the rounded mean for all categories or "No results"."""
         summed_average = 0
         summed_weight = 0
 

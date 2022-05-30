@@ -20,7 +20,7 @@ from gradebook.gradebook_new import main as gbnew_main
 
 
 def main():
-    """Parse command line and hand off to subcommands."""
+    """Parses command line and hands off to subcommands."""
     args = docopt(__doc__, version="gradebook v0.5.0", options_first=True)
     cmd = args["<command>"]
     cmd_args = [cmd] + args["<args>"]

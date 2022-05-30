@@ -7,7 +7,7 @@ from gradebook import gradebook_student as gbs
 @pytest.mark.parametrize("term", ["q1", "q2", "q3", "q4", "s1", "s2"])
 def test_get_term_filter(term):
     terms = {"q1": "q1", "q2": "q2", "q3": "q3", "q4": "q4", "s1": "s1", "s2": "s2"}
-    assert gbc.get_term_filter(term, terms) == term
+    assert term == gbc.get_term_filter(term, terms)
 
 
 @pytest.mark.parametrize("term", ["q5", "2", "s3", "r4"])
@@ -29,7 +29,7 @@ def test_get_term_filter_exception(term):
 )
 def test_is_in_term(assignment_date, expected):
     term = {"start": "20200908", "end": "20201106"}
-    assert gbc.is_in_term(assignment_date, term) == expected
+    assert expected == gbc.is_in_term(assignment_date, term)
 
 
 def test_load_students():
@@ -69,4 +69,4 @@ def test_load_students():
 )
 def test_extract_date(file_path, extracted_date):
     file_path = Path.cwd() / file_path
-    assert gbc.extract_date(file_path) == extracted_date
+    assert extracted_date == gbc.extract_date(file_path)
