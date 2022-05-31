@@ -1,3 +1,4 @@
+"""Tests gradebook_calc."""
 from pathlib import Path
 import pytest
 from gradebook import gradebook_calc as gbc
@@ -53,6 +54,7 @@ def test_load_students():
         == actual_dict["peter@school.edu"].last_name
     )
     assert (
+        # pylint: disable=protected-access
         expected_dict["peter@school.edu"]._categories
         == actual_dict["peter@school.edu"]._categories
     )

@@ -1,6 +1,6 @@
-"""Most basic testing of my setup."""
+"""Checks most basic test setup."""
 try:
-    import gradebook  # noqa: F401
+    import gradebook  # noqa # pylint: disable=unused-import
 except ModuleNotFoundError:
     print("`PYTHONPATH=src pytest` or `export PYTHONPATH=src && pytest`")
     raise

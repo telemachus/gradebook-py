@@ -1,3 +1,4 @@
+"""Tests gradebook_common."""
 import sys
 from gradebook import gradebook_common as gbc
 
