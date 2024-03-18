@@ -5,9 +5,11 @@ options:
     --help, -h              Show this help screen
 
 """
+
 from pathlib import Path
 
 from docopt import docopt
+
 from gradebook.gradebook_common import load_config_or_die as gb_load_config_or_die
 
 CONFIG_FILE = Path.cwd() / "class.json"

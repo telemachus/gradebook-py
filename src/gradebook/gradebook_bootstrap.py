@@ -12,9 +12,12 @@ The following commands are available:
 See 'gradebook <command> --help for information about specific commands.
 
 """
+
 from docopt import docopt
+
 from gradebook.gradebook_calc import main as gbcalc_main
-from gradebook.gradebook_common import warn as gb_warn, die as gb_die
+from gradebook.gradebook_common import die as gb_die
+from gradebook.gradebook_common import warn as gb_warn
 from gradebook.gradebook_names import main as gbnames_main
 from gradebook.gradebook_new import main as gbnew_main
 

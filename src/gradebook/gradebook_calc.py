@@ -8,9 +8,13 @@ options:
     --help, -h                  Show this message
 
 """
+
 import json
+import sys
 from pathlib import Path
+
 from docopt import docopt
+
 from gradebook.gradebook_common import load_config_or_die as gb_load_config_or_die
 from gradebook.gradebook_student import Student
 
