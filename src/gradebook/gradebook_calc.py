@@ -94,11 +94,22 @@ def main(calc_args):
     students = load_students(cfg["students"], cfg["categories"])
 
     if quarter is not None:
-        term_filter = get_term_filter("q" + quarter, cfg["terms"])
-        load_grades(students, term_filter)
+        try:
+            term_filter = get_term_filter("q" + quarter, cfg["terms"])
+            load_grades(students, term_filter)
+        except ValueError:
+            sys.exit(
+                f"{quarter} is not a valid quarter. "
+                f"Valid quarters are {{1, 2, 3, 4}}."
+            )
     elif semester is not None:
-        term_filter = get_term_filter("s" + semester, cfg["terms"])
-        load_grades(students, term_filter)
+        try:
+            term_filter = get_term_filter("s" + semester, cfg["terms"])
+            load_grades(students, term_filter)
+        except ValueError:
+            sys.exit(
+                f"{semester} is not a valid semester. Valid semesters are {{1, 2}}."
+            )
     else:
         load_grades(students)
 
