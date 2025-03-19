@@ -1,5 +1,9 @@
 """Tests gradebook_common."""
+
 import sys
+
+from pytest import raises
+
 from gradebook import gradebook_common as gbc
 
 
@@ -71,6 +75,17 @@ dummy_dict = {
 # }}}
 
 
-def test_load_config(shared_datadir):
-    config_file = "class.json"
-    assert dummy_dict == gbc.load_config(shared_datadir / config_file)
+def test_load_json(shared_datadir):
+    json_file = "class.json"
+    assert dummy_dict == gbc.load_json(shared_datadir / json_file)
+
+
+def test_load_json_or_die(shared_datadir):
+    bad_json = "bad.json"
+    nosuch_json = "nosuch.json"
+
+    with raises(SystemExit) as e:
+        gbc.load_json_or_die(shared_datadir / bad_json)
+
+    with raises(SystemExit) as e:
+        gbc.load_json_or_die(shared_datadir / nosuch_json)

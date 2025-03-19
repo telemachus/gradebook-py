@@ -1,4 +1,5 @@
 """Checks most basic test setup."""
+
 try:
     import gradebook  # noqa # pylint: disable=unused-import
 except ModuleNotFoundError:

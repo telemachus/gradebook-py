@@ -15,7 +15,7 @@ from pathlib import Path
 
 from docopt import docopt
 
-from gradebook.gradebook_common import load_config_or_die as gb_load_config_or_die
+from gradebook.gradebook_common import load_json_or_die as gb_load_json_or_die
 from gradebook.gradebook_student import Student
 
 CONFIG_FILE = Path.cwd() / "class.json"
@@ -58,8 +58,7 @@ def grade_data_generator(date_filter=None):
             date = extract_date(file_path)
             if not is_in_term(date, date_filter):
                 continue
-        with open(file_path, mode="rt", encoding="utf-8") as file_handle:
-            yield json.load(file_handle)
+        yield gb_load_json_or_die(file_path)
 
 
 def load_grades(student_objs, data_filter=None):
@@ -89,7 +88,7 @@ def main(calc_args):
     quarter = arguments["--quarter"]
     semester = arguments["--semester"]
 
-    cfg = gb_load_config_or_die(CONFIG_FILE)
+    cfg = gb_load_json_or_die(CONFIG_FILE)
 
     students = load_students(cfg["students"], cfg["categories"])
 

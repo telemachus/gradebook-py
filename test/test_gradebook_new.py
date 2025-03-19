@@ -1,7 +1,10 @@
 """Tests gradebook_new."""
-from pathlib import Path
-import pytest
+
 from datetime import datetime
+from pathlib import Path
+
+import pytest
+
 from gradebook import gradebook_new as gbn
 
 

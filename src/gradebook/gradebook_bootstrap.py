@@ -24,7 +24,7 @@ from gradebook.gradebook_new import main as gbnew_main
 
 def main():
     """Parses command line and hands off to subcommands."""
-    args = docopt(__doc__, version="gradebook v2024-03-17", options_first=True)
+    args = docopt(__doc__, version="gradebook v2025-03-19", options_first=True)
     cmd = args["<command>"]
     cmd_args = [cmd] + args["<args>"]
     if cmd == "new":

@@ -1,5 +1,7 @@
 """Tests gradebook_student."""
+
 import pytest
+
 from gradebook import gradebook_student as gbs
 
 
@@ -18,7 +20,6 @@ def test_student_initialization(fname, lname, email):
     assert fname == random_student.first_name
     assert lname == random_student.last_name
     assert email == random_student.email
-    # assert [] == random_student._categories[category]
 
 
 def test_add_grade():

@@ -1,6 +1,9 @@
 """Tests gradebook_calc."""
+
 from pathlib import Path
+
 import pytest
+
 from gradebook import gradebook_calc as gbc
 from gradebook import gradebook_student as gbs
 

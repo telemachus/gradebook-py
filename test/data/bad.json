@@ -1,0 +1,66 @@
+{
+    "categories": [
+        "major",
+        "minor",
+        "cp"
+    ],
+    "categories_pretty": {
+        "cp": "Class participation",
+        "major": "Major assessments",
+        "minor": "Daily work and quizzes"
+    },
+    "category_weights": {
+        "cp": 20,
+        "major": 50,
+        "minor": 30
+    },
+    "name": "Ancient Philosophy Survey",
+    "students": {
+        "agomezlobo@school.edu": {
+            "first_name": "Alfonso",
+            "last_name": "Gómez-Lobo"
+        },
+        "gfine@school.edu": {
+            "first_name": "Gail",
+            "last_name": "Fine"
+        },
+        "gstriker@school.edu": {
+            "first_name": "Gisela",
+            "last_name": "Striker"
+        },
+        "jannas@school.edu": {
+            "first_name": "Julia",
+            "last_name": "Annas"
+        },
+        "mfrede@school.edu": {
+            "first_name": "Michael",
+            "last_name": "Frede"
+        }
+    },
+    "terms": {
+        "q1": {
+            "end": "20201106",
+            "start": "20200908"
+        },
+        "q2": {
+            "end": "20210115",
+            "start": "20201109"
+        },
+        "q3": {
+            "end": "20201101",
+            "start": "20200901"
+        },
+        "q4": {
+            "end": "20201101",
+            "start": "20200901"
+        },
+        "s1": {
+            "end": "20201101",
+            "start": "20200901"
+        },
+        "s2": {
+            "end": "20201101",
+            "start": "20200901"
+        }
+    },
+    "types_to_categories": {

@@ -1,9 +1,9 @@
 """usage: gradebook new --type TYPE --name NAME [--date DATE]
 
 options:
-    --type TYPE, -t TYPE    Specify assignment’s type (required)
-    --name NAME, -n NAME    Specify assignment’s name (required)
-    --date DATE, -d DATE    Specify assignment’s date (optional)
+    --type TYPE, -t TYPE    Specify assignment's type (required)
+    --name NAME, -n NAME    Specify assignment's name (required)
+    --date DATE, -d DATE    Specify assignment's date (optional)
     --help, -h              Show this help screen
 
 """
@@ -16,7 +16,7 @@ from pathlib import Path
 from docopt import docopt
 
 from gradebook.gradebook_common import die as gb_die
-from gradebook.gradebook_common import load_config_or_die as gb_load_config_or_die
+from gradebook.gradebook_common import load_json_or_die as gb_load_json_or_die
 
 CONFIG_FILE = Path.cwd() / "class.json"
 
@@ -168,7 +168,7 @@ def main(calc_args):
     assignment_name = arguments["--name"]
     assignment_date = normalize_date(arguments["--date"])
 
-    cfg = gb_load_config_or_die(CONFIG_FILE)
+    cfg = gb_load_json_or_die(CONFIG_FILE)
 
     assignment_types = cfg["types_to_categories"].keys()
     validate_assignment_type_or_die(assignment_type, assignment_types)
@@ -188,4 +188,4 @@ def main(calc_args):
     try:
         write_json(gradebook, file_name)
     except OSError:
-        gb_die(f"failed to write json to {file_name}")
+        gb_die(f"failed to write JSON to {file_name}")

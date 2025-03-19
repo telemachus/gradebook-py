@@ -10,7 +10,7 @@ from pathlib import Path
 
 from docopt import docopt
 
-from gradebook.gradebook_common import load_config_or_die as gb_load_config_or_die
+from gradebook.gradebook_common import load_json_or_die as gb_load_json_or_die
 
 CONFIG_FILE = Path.cwd() / "class.json"
 
@@ -40,7 +40,7 @@ def main(calc_args):
     flags = docopt(__doc__, argv=calc_args)
     last_first = flags["--last-first"]
 
-    cfg = gb_load_config_or_die(CONFIG_FILE)
+    cfg = gb_load_json_or_die(CONFIG_FILE)
 
     student_names = compose_student_names(cfg["students"], last_first)
     for student in student_names:
