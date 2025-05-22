@@ -1,0 +1,16 @@
+{
+    "assignment_category": "major",
+    "assignment_date": "20240923",
+    "assignment_grades": [
+        {
+            "email": "jane.doe@school.edu",
+            "grade": null
+        },
+        {
+            "email": "john.doe@school.edu",
+            "grade": 0
+        }
+    ],
+    "assignment_name": "vocabulary-review",
+    "assignment_type": "test"
+}

@@ -51,9 +51,9 @@ def extract_date(file_path):
     return file_path.stem[-8:]
 
 
-def grade_data_generator(date_filter=None):
+def grade_data_generator(path, date_filter=None):
     """Yields data from grade files."""
-    for file_path in Path(".").glob("*.gradebook"):
+    for file_path in Path(path).glob("*.gradebook"):
         if date_filter:
             date = extract_date(file_path)
             if not is_in_term(date, date_filter):
@@ -61,15 +61,19 @@ def grade_data_generator(date_filter=None):
         yield gb_load_json_or_die(file_path)
 
 
-def load_grades(student_objs, data_filter=None):
+def load_grades(student_objs, path, data_filter=None):
     """Loads all grades from gradebook files."""
-    for grade_data in grade_data_generator(data_filter):
+    for grade_data in grade_data_generator(path, data_filter):
         assignment_category = grade_data["assignment_category"]
         for student in grade_data["assignment_grades"]:
-            grade = student["grade"]
-            email = student["email"]
-            if grade:
-                student_objs[email].add_grade(grade, assignment_category)
+            if student["grade"] is not None:
+                try:
+                    student_objs[student["email"]].add_grade(
+                        student["grade"], assignment_category
+                    )
+                except KeyError:
+                    # TODO: I should print something to stderr here.
+                    pass
 
 
 def display_grades(students, categories_pretty, weights):
@@ -95,7 +99,7 @@ def main(calc_args):
     if quarter is not None:
         try:
             term_filter = get_term_filter("q" + quarter, cfg["terms"])
-            load_grades(students, term_filter)
+            load_grades(students, Path.cwd(), term_filter)
         except ValueError:
             sys.exit(
                 f"{quarter} is not a valid quarter. "
@@ -104,12 +108,12 @@ def main(calc_args):
     elif semester is not None:
         try:
             term_filter = get_term_filter("s" + semester, cfg["terms"])
-            load_grades(students, term_filter)
+            load_grades(students, Path.cwd(), term_filter)
         except ValueError:
             sys.exit(
                 f"{semester} is not a valid semester. Valid semesters are {{1, 2}}."
             )
     else:
-        load_grades(students)
+        load_grades(students, Path.cwd())
 
     display_grades(students, cfg["categories_pretty"], cfg["category_weights"])
