@@ -84,8 +84,8 @@ def test_load_json_or_die(shared_datadir):
     bad_json = "bad.json"
     nosuch_json = "nosuch.json"
 
-    with raises(SystemExit) as e:
+    with raises(SystemExit):
         gbc.load_json_or_die(shared_datadir / bad_json)
 
-    with raises(SystemExit) as e:
+    with raises(SystemExit):
         gbc.load_json_or_die(shared_datadir / nosuch_json)

@@ -52,7 +52,7 @@ def validate_assignment_type_or_die(assignment_type, assignment_types):
     except ValueError:
         msg = f"{assignment_type} is not a valid type: "
         msg += "update class.json or pick a valid type.\n"
-        msg += f"Here are the valid types: {', '.join(assignment_types)}."
+        msg += f"Here are the valid types: {", ".join(assignment_types)}."
         gb_die(msg)
 
 

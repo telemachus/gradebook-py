@@ -25,10 +25,6 @@ class Student:
             return "No results"
         return round(fmean(self._categories[category]))
 
-    def email(self):
-        """Returns a student's email."""
-        return self.email
-
     def has_grades(self, category):
         """Returns whether a given category has any grades."""
         return len(self._categories[category]) > 0
