@@ -26,17 +26,17 @@
             "end": "20201101"
         }
     },
-    "assignment_types": [
+    "assignment_categories": [
         "major",
         "minor",
         "cp"
     ],
-    "labels_by_assignment_type": {
+    "labels_by_assignment_category": {
         "major": "Major assessments",
         "minor": "Daily work and quizzes",
         "cp": "Class participation"
     },
-    "weights_by_assignment_type": {
+    "weights_by_assignment_category": {
         "major": 50,
         "minor": 30,
         "cp": 20

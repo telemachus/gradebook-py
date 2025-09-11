@@ -32,7 +32,7 @@ def test_add_grade():
     michael_frede = gbs.Student(fname, lname, email, assignment_types)
     michael_frede.add_grade(grade, category)
     # pylint: disable=protected-access
-    assert grade == michael_frede._assignment_types[category][0]
+    assert grade == michael_frede._assignment_categories[category][0]
 
 
 def test_average():

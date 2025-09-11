@@ -53,13 +53,13 @@ def test_validate_assignment_date_exception():
         gbn.validate_assignment_date(ymd)
 
 
-def test_make_assignment_grades():
+def test_make_assignment_records():
     students = {
         "mfrede02@school.edu": {"first_name": "Michael", "last_name": "Frede"},
         "gstriker@school.edu": {"first_name": "Gisela", "last_name": "Striker"},
         "mfrede01@school.edu": {"first_name": "Michael", "last_name": "Frede"},
     }
-    expected_assignment_grades = [
+    expected_assignment_records = [
         {
             "email": "mfrede01@school.edu",
             "grade": None,
@@ -73,7 +73,7 @@ def test_make_assignment_grades():
             "grade": None,
         },
     ]
-    assert expected_assignment_grades == gbn.make_assignment_grades(students)
+    assert expected_assignment_records == gbn.make_assignment_records(students)
 
 
 def test_make_file_name():
@@ -100,7 +100,7 @@ def test_build_gradebook():
         "assignment_name": "vergil-2.101-110",
         "assignment_type": "quiz",
         "assignment_category": "minor",
-        "assignment_grades": students,
+        "assignment_records": students,
     }
     # }}}
     assert gradebook_after == gbn.build_gradebook(

@@ -58,8 +58,8 @@ def test_load_students():
     )
     assert (
         # pylint: disable=protected-access
-        expected_dict["peter@school.edu"]._assignment_types
-        == actual_dict["peter@school.edu"]._assignment_types
+        expected_dict["peter@school.edu"]._assignment_categories
+        == actual_dict["peter@school.edu"]._assignment_categories
     )
 
 

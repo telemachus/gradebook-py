@@ -49,13 +49,13 @@ dummy_dict = {
         "s1": {"start": "20200901", "end": "20201101"},
         "s2": {"start": "20200901", "end": "20201101"},
     },
-    "assignment_types": ["major", "minor", "cp"],
-    "labels_by_assignment_type": {
+    "assignment_categories": ["major", "minor", "cp"],
+    "labels_by_assignment_category": {
         "major": "Major assessments",
         "minor": "Daily work and quizzes",
         "cp": "Class participation",
     },
-    "weights_by_assignment_type": {"major": 50, "minor": 30, "cp": 20},
+    "weights_by_assignment_category": {"major": 50, "minor": 30, "cp": 20},
     "categories_by_assignment_type": {
         "test": "major",
         "project": "major",

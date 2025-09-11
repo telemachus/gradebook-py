@@ -64,7 +64,7 @@ def load_grades(student_objs, path, data_filter=None):
     """Loads all grades from gradebook files."""
     for grade_data in grade_data_generator(path, data_filter):
         assignment_category = grade_data["assignment_category"]
-        for student in grade_data["assignment_grades"]:
+        for student in grade_data["assignment_records"]:
             if student["grade"] is not None:
                 try:
                     student_objs[student["email"]].add_grade(
@@ -93,7 +93,7 @@ def main(calc_args):
 
     cfg = gb_load_json_or_die(CONFIG_FILE)
 
-    students = load_students(cfg["students_by_email"], cfg["assignment_types"])
+    students = load_students(cfg["students_by_email"], cfg["assignment_categories"])
 
     if quarter is not None:
         try:
@@ -116,5 +116,7 @@ def main(calc_args):
         load_grades(students, Path.cwd())
 
     display_grades(
-        students, cfg["labels_by_assignment_type"], cfg["weights_by_assignment_type"]
+        students,
+        cfg["labels_by_assignment_category"],
+        cfg["weights_by_assignment_category"],
     )

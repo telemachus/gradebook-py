@@ -107,8 +107,8 @@ def validate_assignment_date_or_die(date_string):
         gb_die(f"{date_string} is not a valid date")
 
 
-def make_assignment_grades(students):
-    """Creates a list of assignment grade entries from a dict of students.
+def make_assignment_records(students):
+    """Creates a list of assignment record entries from a dict of students.
 
     Args:
         students:
@@ -121,11 +121,11 @@ def make_assignment_grades(students):
         case where two students have the identical name, they are sorted by
         emails, which must be unique.
     """
-    assignment_grades = []
+    assignment_records = []
     for student_email in students.keys():
-        assignment_grades.append({"email": student_email, "grade": None})
-    sorted_assignment_grades = sorted(
-        assignment_grades,
+        assignment_records.append({"email": student_email, "grade": None})
+    sorted_assignment_records = sorted(
+        assignment_records,
         key=lambda x: (
             students[x["email"]]["last_name"],
             students[x["email"]]["first_name"],
@@ -133,7 +133,7 @@ def make_assignment_grades(students):
         ),
     )
 
-    return sorted_assignment_grades
+    return sorted_assignment_records
 
 
 def make_file_name(assignment_type, assignment_name, ymd):
@@ -150,7 +150,7 @@ def build_gradebook(a_date, a_name, a_type, a_category, students):
         "assignment_name": a_name,
         "assignment_type": a_type,
         "assignment_category": a_category,
-        "assignment_grades": students,
+        "assignment_records": students,
     }
     return gradebook
 
@@ -176,13 +176,13 @@ def main(calc_args):
     validate_assignment_date_or_die(arguments["--date"])
     file_name = make_file_name(assignment_type, assignment_name, assignment_date)
 
-    assignment_grades = make_assignment_grades(cfg["students_by_email"])
+    assignment_records = make_assignment_records(cfg["students_by_email"])
     gradebook = build_gradebook(
         assignment_date,
         assignment_name,
         assignment_type,
         cfg["categories_by_assignment_type"][assignment_type],
-        assignment_grades,
+        assignment_records,
     )
 
     try:
