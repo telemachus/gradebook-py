@@ -42,6 +42,6 @@ def main(calc_args):
 
     cfg = gb_load_json_or_die(CONFIG_FILE)
 
-    student_names = compose_student_names(cfg["students"], last_first)
+    student_names = compose_student_names(cfg["students_by_email"], last_first)
     for student in student_names:
         print(student)

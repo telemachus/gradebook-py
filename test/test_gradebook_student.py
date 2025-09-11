@@ -27,12 +27,12 @@ def test_add_grade():
     lname = "Frede"
     email = "mfrede@school.edu"
     category = "major"
-    categories = {category: True}
+    assignment_types = [category]
     grade = 89.9
-    michael_frede = gbs.Student(fname, lname, email, categories)
+    michael_frede = gbs.Student(fname, lname, email, assignment_types)
     michael_frede.add_grade(grade, category)
     # pylint: disable=protected-access
-    assert grade == michael_frede._categories[category][0]
+    assert grade == michael_frede._assignment_types[category][0]
 
 
 def test_average():
@@ -40,8 +40,8 @@ def test_average():
     lname = "Frede"
     email = "mfrede@school.edu"
     category = "major"
-    categories = {category: True}
-    michael_frede = gbs.Student(fname, lname, email, categories)
+    assignment_types = [category]
+    michael_frede = gbs.Student(fname, lname, email, assignment_types)
     assert "No results" == michael_frede.average(category)
 
     grades = [85, 90, 95]
@@ -54,17 +54,17 @@ def test_total_average():
     fname = "Michael"
     lname = "Frede"
     email = "mfrede@school.edu"
-    categories = {"major": True, "minor": True, "cp": True}
-    weights = {"major": 50, "minor": 30, "cp": 20}
-    michael_frede = gbs.Student(fname, lname, email, categories)
-    assert "No results" == michael_frede.total_average(weights)
+    assignment_types = ["major", "minor", "cp"]
+    weights_by_assignment_type = {"major": 50, "minor": 30, "cp": 20}
+    michael_frede = gbs.Student(fname, lname, email, assignment_types)
+    assert "No results" == michael_frede.total_average(weights_by_assignment_type)
 
     grades = [90, 90, 90]
-    for grade, category in zip(grades, categories.keys()):
-        michael_frede.add_grade(grade, category)
-    assert 90 == michael_frede.total_average(weights)
+    for grade, assignment_type in zip(grades, assignment_types):
+        michael_frede.add_grade(grade, assignment_type)
+    assert 90 == michael_frede.total_average(weights_by_assignment_type)
 
     grades = [(94, "major"), (82, "minor"), (75, "cp")]
-    for grade, category in grades:
-        michael_frede.add_grade(grade, category)
-    assert 88 == michael_frede.total_average(weights)
+    for grade, assignment_type in grades:
+        michael_frede.add_grade(grade, assignment_type)
+    assert 88 == michael_frede.total_average(weights_by_assignment_type)

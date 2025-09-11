@@ -41,7 +41,7 @@ def test_die_with_program_name(mocker):
 # {{{ Python dict fixture to test JSON loading
 dummy_dict = {
     "name": "Ancient Philosophy Survey",
-    "terms": {
+    "terms_by_id": {
         "q1": {"start": "20200908", "end": "20201106"},
         "q2": {"start": "20201109", "end": "20210115"},
         "q3": {"start": "20200901", "end": "20201101"},
@@ -49,14 +49,14 @@ dummy_dict = {
         "s1": {"start": "20200901", "end": "20201101"},
         "s2": {"start": "20200901", "end": "20201101"},
     },
-    "categories": ["major", "minor", "cp"],
-    "categories_pretty": {
+    "assignment_types": ["major", "minor", "cp"],
+    "labels_by_assignment_type": {
         "major": "Major assessments",
         "minor": "Daily work and quizzes",
         "cp": "Class participation",
     },
-    "category_weights": {"major": 50, "minor": 30, "cp": 20},
-    "types_to_categories": {
+    "weights_by_assignment_type": {"major": 50, "minor": 30, "cp": 20},
+    "categories_by_assignment_type": {
         "test": "major",
         "project": "major",
         "essay": "major",
@@ -64,7 +64,7 @@ dummy_dict = {
         "hw": "minor",
         "cp": "cp",
     },
-    "students": {
+    "students_by_email": {
         "gstriker@school.edu": {"first_name": "Gisela", "last_name": "Striker"},
         "mfrede@school.edu": {"first_name": "Michael", "last_name": "Frede"},
         "jannas@school.edu": {"first_name": "Julia", "last_name": "Annas"},

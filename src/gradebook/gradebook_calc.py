@@ -93,11 +93,11 @@ def main(calc_args):
 
     cfg = gb_load_json_or_die(CONFIG_FILE)
 
-    students = load_students(cfg["students"], cfg["categories"])
+    students = load_students(cfg["students_by_email"], cfg["assignment_types"])
 
     if quarter is not None:
         try:
-            term_filter = get_term_filter("q" + quarter, cfg["terms"])
+            term_filter = get_term_filter("q" + quarter, cfg["terms_by_id"])
             load_grades(students, Path.cwd(), term_filter)
         except ValueError:
             sys.exit(
@@ -115,4 +115,6 @@ def main(calc_args):
     else:
         load_grades(students, Path.cwd())
 
-    display_grades(students, cfg["categories_pretty"], cfg["category_weights"])
+    display_grades(
+        students, cfg["labels_by_assignment_type"], cfg["weights_by_assignment_type"]
+    )

@@ -170,18 +170,18 @@ def main(calc_args):
 
     cfg = gb_load_json_or_die(CONFIG_FILE)
 
-    assignment_types = cfg["types_to_categories"].keys()
+    assignment_types = cfg["categories_by_assignment_type"].keys()
     validate_assignment_type_or_die(assignment_type, assignment_types)
     validate_assignment_name_or_die(assignment_name)
     validate_assignment_date_or_die(arguments["--date"])
     file_name = make_file_name(assignment_type, assignment_name, assignment_date)
 
-    assignment_grades = make_assignment_grades(cfg["students"])
+    assignment_grades = make_assignment_grades(cfg["students_by_email"])
     gradebook = build_gradebook(
         assignment_date,
         assignment_name,
         assignment_type,
-        cfg["types_to_categories"][assignment_type],
+        cfg["categories_by_assignment_type"][assignment_type],
         assignment_grades,
     )
 
